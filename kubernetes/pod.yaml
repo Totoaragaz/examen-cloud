@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  volumes:
+    - name: shared-volume
+      emptyDir: {}
+
+  containers:
+    - name: container-1
+      image: alpine:3.12.0
+      command: ["tail", "-f", "/dev/null"]
+      volumeMounts:
+        - name: shared-volume
+          mountPath: "/etc/a"
+
+    - name: container-2
+      image: alpine:3.12.0
+      command: ["tail", "-f", "/dev/null"]
+      volumeMounts:
+        - name: shared-volume
+          mountPath: "/etc/b"
